@@ -1,5 +1,7 @@
 import React from 'react';
+import './login.css'
 import { Redirect } from 'react-router-dom';
+import logo from './logo.png';
 
 
 class Login extends React.Component{
@@ -12,7 +14,6 @@ class Login extends React.Component{
         {
           this.setState({ authenticated: true });
           console.log('Logged IN');
-          
         }
         else 
         {
@@ -29,9 +30,14 @@ class Login extends React.Component{
       };
 
     render(){
-        return<>
-            <h1>NOverdose</h1>
-            <div className="form-group">
+        return <>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137604632-1"></script>
+            <div class="imgcontainer">
+                <h1>Welcome to NOverdose!</h1>
+                <img src={logo} alt="Avatar" class="avatar"></img>
+            </div>
+
+            <div className="login-form">
                 <form>
                     <label>Email</label>
                     <input
@@ -39,11 +45,11 @@ class Login extends React.Component{
                                             name="email"
                                             value={this.state.email}
                                             onChange={ e => this.setState({ email: e.target.value }) }
-                                            placeholder="Enter Email"
+                                            placeholder="email"
                                         />
                 </form>
             </div>
-            <div className="form-group">
+            <div className="login-form">
             <form>
                 <label>Password</label>
                 <input
@@ -51,14 +57,14 @@ class Login extends React.Component{
                                         name="email"
                                         value={this.state.password}
                                         onChange={ e => this.setState({ password: e.target.value }) }
-                                        placeholder="Enter Email"
+                                        placeholder="password"
                                     />
             </form>
             <button className = "loginButton" type="button" disabled={!this.state.email || !this.state.password} 
             onClick={this.authenticateUser}>Log In</button>
             { this.state.authenticated  && <Redirect to="/homePage" /> }
-            <button className = "registerButton" type="button"  onClick={this.registerUser}>Register</button>
-            { this.state.register  && <Redirect to="/register" /> }
+            <button className="registerButton" type="button" onClick={this.registerUser}>Register</button>
+            {this.state.register && <Redirect to="/register" />}
             </div>
             </>;
     }
